@@ -33,3 +33,20 @@ private GreetingService greetingService;
 **@Qualifier vs @Primary**:
 - @Primary → Default bean when multiple exist.
 - @Qualifier → Explicit bean selection (overrides @Primary).
+
+# @Primary in Spring
+
+**Purpose**: Marks a bean as the default choice when multiple beans of the same type exist.
+
+**Usage**:
+- Place on @Component class or @Bean method.
+- Spring will inject this bean unless a @Qualifier specifies another.
+
+**Example**:
+@Component
+@Primary
+public class SpanishGreetingService implements GreetingService { ... }
+
+**@Primary vs @Qualifier**:
+- @Primary → Default bean for a type.
+- @Qualifier → Explicit bean selection (overrides @Primary).
