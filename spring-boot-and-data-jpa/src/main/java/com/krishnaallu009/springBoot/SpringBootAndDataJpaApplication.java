@@ -10,7 +10,7 @@ public class SpringBootAndDataJpaApplication {
 	public static void main(String[] args) {
 		var ctx = SpringApplication.run(SpringBootAndDataJpaApplication.class, args);
 
-        MyFirstClass myFirstClass = ctx.getBean(MyFirstClass.class);
+        MyFirstClass myFirstClass = ctx.getBean("myBean",MyFirstClass.class);
         System.out.println(myFirstClass.greet());
 	}
 
