@@ -14,9 +14,6 @@ public class SpringBootAndDataJpaApplication {
         System.out.println(myFirstClass.greet());
 	}
 
-//    @Bean
-    public MyFirstClass myFirstClass() {
-        return new MyFirstClass();
-    }
+
 
 }
