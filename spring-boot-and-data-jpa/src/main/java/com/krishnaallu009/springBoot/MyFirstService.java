@@ -7,14 +7,23 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MyFirstService {
-    @Autowired
-    @Qualifier("mySecondClass")
+
+//    Field Injection
+//    @Autowired
+//    @Qualifier("mySecondClass")
     private MyFirstClass myFirstClass;
 
-
+//    Constructor Injection
+//    @Autowired
 //    public MyFirstService(MyFirstClass myFirstClass) {
 //        this.myFirstClass = myFirstClass;
 //    }
+
+//    Setter Injection
+    @Autowired
+    public void setMyFirstClass(@Qualifier("myThirdClass") MyFirstClass myFirstClass) {
+        this.myFirstClass = myFirstClass;
+    }
 
     public String tellAStory() {
         return "The dependency is saying : " + myFirstClass.greet() + " from MyFirstService";
