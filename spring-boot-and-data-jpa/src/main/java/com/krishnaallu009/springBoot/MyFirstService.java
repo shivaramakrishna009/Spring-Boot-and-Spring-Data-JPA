@@ -3,21 +3,15 @@ package com.krishnaallu009.springBoot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 @Service
 public class MyFirstService {
 
-//    Field Injection
-//    @Autowired
-//    @Qualifier("mySecondClass")
     private MyFirstClass myFirstClass;
 
-//    Constructor Injection
-//    @Autowired
-//    public MyFirstService(MyFirstClass myFirstClass) {
-//        this.myFirstClass = myFirstClass;
-//    }
+    private Environment environment;
 
 //    Setter Injection
     @Autowired
@@ -27,5 +21,18 @@ public class MyFirstService {
 
     public String tellAStory() {
         return "The dependency is saying : " + myFirstClass.greet() + " from MyFirstService";
+    }
+
+    public String getJavaVersion() {
+        return environment.getProperty("java.version");
+    }
+
+    public String getOsName() {
+        return environment.getProperty("os.name");
+    }
+
+    @Autowired
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
     }
 }
