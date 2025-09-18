@@ -12,6 +12,9 @@ public class SpringBootAndDataJpaApplication {
 
         MyFirstService myFirstService = ctx.getBean(MyFirstService.class);
         System.out.println(myFirstService.tellAStory());
+        System.out.println(myFirstService.getMyProperty());
+        System.out.println(myFirstService.getMyPropertyFromCustomPropertyFile());
+        System.out.println(myFirstService.getMyPropertyFromCustomProperty2File());
 	}
 
 
