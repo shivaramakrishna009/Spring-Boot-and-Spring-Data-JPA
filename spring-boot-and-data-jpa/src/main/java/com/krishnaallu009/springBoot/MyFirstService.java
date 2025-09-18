@@ -31,6 +31,10 @@ public class MyFirstService {
         return environment.getProperty("os.name");
     }
 
+    public String readProperty() {
+        return environment.getProperty("my.custom.property", "Bhanu loves krishna");
+    }
+
     @Autowired
     public void setEnvironment(Environment environment) {
         this.environment = environment;
