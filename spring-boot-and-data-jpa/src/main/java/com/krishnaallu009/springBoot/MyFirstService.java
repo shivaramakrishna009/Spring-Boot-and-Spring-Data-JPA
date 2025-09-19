@@ -22,7 +22,7 @@ public class MyFirstService {
     @Value("Srk <3 B")
     private String myProperty;
 
-    @Value("${my.prop}")
+    @Value("${my.custom.property}")
     private String myPropertyFromCustomPropertyFile;
 
     @Value("${my.prop.2}")
@@ -30,8 +30,9 @@ public class MyFirstService {
 
 
 //    Setter Injection
+//    Change the bean name in @Qualifier to use different beans
     @Autowired
-    public void setMyFirstClass(@Qualifier("myThirdClass") MyFirstClass myFirstClass) {
+    public void setMyFirstClass(@Qualifier("myFirstClass") MyFirstClass myFirstClass) {
         this.myFirstClass = myFirstClass;
     }
 

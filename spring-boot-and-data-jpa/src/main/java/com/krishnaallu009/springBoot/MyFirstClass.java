@@ -2,7 +2,7 @@ package com.krishnaallu009.springBoot;
 
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component  // Spring no longer auto-registers it during component scanning.
 public class MyFirstClass {
 
     private String message;
