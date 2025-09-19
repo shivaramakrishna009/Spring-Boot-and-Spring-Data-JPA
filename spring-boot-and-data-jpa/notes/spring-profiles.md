@@ -19,3 +19,14 @@
 - !profile → NOT
 - profile1 & profile2 → AND
 - profile1 | profile2 → OR
+
+# @Profile Annotation
+
+**Purpose**: Conditionally register beans/configs based on active profiles.
+
+**Usage**:
+- @Profile("profileName") on @Component, @Configuration, or @Bean.
+- Activate profiles via:
+    - application.properties → spring.profiles.active=dev
+    - Command line → --spring.profiles.active=prod
+    - Programmatically via Environment API
