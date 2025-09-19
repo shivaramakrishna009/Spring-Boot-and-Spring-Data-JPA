@@ -22,7 +22,7 @@ public class MyFirstService {
     @Value("Srk <3 B")
     private String myProperty;
 
-    @Value("${my.prop}")
+    @Value("${my.custom.property}")
     private String myPropertyFromCustomPropertyFile;
 
     @Value("${my.prop.2}")
