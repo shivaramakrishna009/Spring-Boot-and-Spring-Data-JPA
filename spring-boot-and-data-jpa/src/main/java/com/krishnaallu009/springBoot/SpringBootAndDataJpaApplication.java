@@ -4,11 +4,15 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.Collections;
+
 @SpringBootApplication
 public class SpringBootAndDataJpaApplication {
 
 	public static void main(String[] args) {
-		var ctx = SpringApplication.run(SpringBootAndDataJpaApplication.class, args);
+        var app = new SpringApplication(SpringBootAndDataJpaApplication.class);
+        app.setDefaultProperties(Collections.singletonMap("spring.profiles.active", "test"));
+		var ctx = app.run(args);
 
         MyFirstService myFirstService = ctx.getBean(MyFirstService.class);
         System.out.println(myFirstService.tellAStory());
