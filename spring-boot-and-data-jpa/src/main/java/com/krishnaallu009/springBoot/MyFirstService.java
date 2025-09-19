@@ -30,7 +30,7 @@ public class MyFirstService {
 
 
 //    Setter Injection
-//    Chane the bean name in @Qualifier to use different beans
+//    Change the bean name in @Qualifier to use different beans
     @Autowired
     public void setMyFirstClass(@Qualifier("myFirstClass") MyFirstClass myFirstClass) {
         this.myFirstClass = myFirstClass;
