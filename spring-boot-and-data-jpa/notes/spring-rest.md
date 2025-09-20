@@ -61,3 +61,23 @@
 @JsonProperty("full_name")
 private String fullName;
 ```
+
+# Records vs POJOs
+
+**POJO**:
+- General-purpose Java class.
+- Mutable by default.
+- Can extend classes and implement interfaces.
+- Needs manual boilerplate or Lombok.
+- Best for JPA entities, mutable models, legacy integration.
+
+**Record**:
+- Special immutable data carrier (Java 16+).
+- All fields `private final`.
+- Auto-generates constructor, accessors, equals, hashCode, toString.
+- Cannot extend classes, can implement interfaces.
+- Best for DTOs, value objects, config data.
+
+**Rule of Thumb**:
+- Use **Record** for simple, immutable data holders.
+- Use **POJO** when mutability, inheritance, or ORM compatibility is required.
