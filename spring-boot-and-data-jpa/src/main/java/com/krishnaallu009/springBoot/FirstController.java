@@ -21,4 +21,9 @@ public class FirstController {
     public String post(@RequestBody String message){
         return "You have posted: "+message;
     }
+
+    @PostMapping("/post-order")
+    public String postOrder(@RequestBody Order order){
+        return "You have ordered: "+order.toString();
+    }
 }
