@@ -81,3 +81,20 @@ private String fullName;
 **Rule of Thumb**:
 - Use **Record** for simple, immutable data holders.
 - Use **POJO** when mutability, inheritance, or ORM compatibility is required.
+
+# @PathVariable
+
+**Purpose**: Extracts values from the URI path and binds them to method parameters.
+
+**Usage**:
+- Define placeholders in the mapping: `/users/{id}`
+- Annotate method parameters with `@PathVariable`
+- Spring auto-converts to the parameter type
+
+**Examples**:
+```java
+@GetMapping("/{id}")
+public User getUser(@PathVariable Long id) { ... }
+
+@GetMapping("/by-username/{uname}")
+public User getUser(@PathVariable("uname") String username) { ... }

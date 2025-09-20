@@ -31,4 +31,9 @@ public class FirstController {
     public String postOrderRecord(@RequestBody OrderRecord orderRecord){
         return "You have ordered: "+orderRecord.toString();
     }
+
+    @GetMapping("/hi-to/{name}")
+    public String hiTo(@PathVariable("name") String name){
+        return "I Love You "+name + "😘😘😘";
+    }
 }
