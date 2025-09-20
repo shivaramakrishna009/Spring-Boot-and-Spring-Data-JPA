@@ -43,3 +43,21 @@
 - `ResponseEntity.status(HttpStatus).body(...)`
 - `@ResponseStatus(HttpStatus)`
 - Exception handling via `@ControllerAdvice`
+
+
+# @JsonProperty (Jackson)
+
+**Purpose**: Maps a Java field/method to a specific JSON property name for serialization/deserialization.
+
+**Package**: `com.fasterxml.jackson.annotation.JsonProperty`
+
+**Usage**:
+- Rename JSON keys without changing Java field names.
+- Map JSON keys with different naming conventions.
+- Ensure mapping for non-public fields.
+
+**Example**:
+```java
+@JsonProperty("full_name")
+private String fullName;
+```

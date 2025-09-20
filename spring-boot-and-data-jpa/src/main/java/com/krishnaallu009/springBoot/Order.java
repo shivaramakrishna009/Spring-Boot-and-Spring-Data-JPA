@@ -1,10 +1,16 @@
 package com.krishnaallu009.springBoot;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Order {
+    @JsonProperty("order_id")
     private int id;
+    @JsonProperty("order_name")
     private String name;
+    @JsonProperty("order_price")
     private double price;
+    @JsonProperty("order_quantity")
     private int quantity;
 
     public Order() {
@@ -63,9 +69,9 @@ public class Order {
 /*
 json example:
 {
-    "id": 1,
-    "name": "Product 1",
-    "price": 100.0,
-    "quantity": 2
+    "order_id": 1,
+    "order_name": "Product 1",
+    "order_price": 100.0,
+    "order_quantity": 2
 
  */
