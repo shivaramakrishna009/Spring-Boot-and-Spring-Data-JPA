@@ -98,3 +98,22 @@ public User getUser(@PathVariable Long id) { ... }
 
 @GetMapping("/by-username/{uname}")
 public User getUser(@PathVariable("uname") String username) { ... }
+```
+
+# @RequestParam
+
+**Purpose**: Binds HTTP request parameters (query/form) to method parameters.
+
+**Usage**:
+- `@RequestParam String name` → Required by default.
+- `@RequestParam("paramName")` → Map to a different request parameter name.
+- `@RequestParam(required = false)` → Optional parameter.
+- `@RequestParam(defaultValue = "value")` → Default if missing.
+- `@RequestParam List<String>` → Multiple values for same parameter.
+- `@RequestParam Map<String, String>` → All parameters as a map.
+
+**Example**:
+```java
+@GetMapping("/search")
+public String search(@RequestParam(defaultValue = "all") String keyword) { ... }
+```

@@ -32,8 +32,18 @@ public class FirstController {
         return "You have ordered: "+orderRecord.toString();
     }
 
-    @GetMapping("/hi-to/{name}")
-    public String hiTo(@PathVariable("name") String name){
+    // http://localhost:8080/hello/Krishna
+    @GetMapping("/hello/{name}")
+    public String pathVar(@PathVariable("name") String name){
         return "I Love You "+name + "😘😘😘";
     }
+
+    // http://localhost:8080/soulmates?paramName1=paramValue&paramName2=paramValue2
+    @GetMapping("/soulmates")
+    public String paramVar(@RequestParam("name1") String name1,
+                           @RequestParam("name2") String name2){
+        return name1 + " loves " + name2;
+    }
+
+
 }
