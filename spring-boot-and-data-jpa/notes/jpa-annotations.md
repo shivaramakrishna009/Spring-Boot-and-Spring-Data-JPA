@@ -138,3 +138,48 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 List<Employee> findByName(String name);
 }
 ```
+
+# @PostMapping (Spring MVC)
+
+**Purpose**: Maps HTTP POST requests to specific handler methods.
+
+**Package**: `org.springframework.web.bind.annotation.PostMapping`
+
+**Usage**:
+- Shortcut for @RequestMapping(method = RequestMethod.POST)
+- Commonly used for CREATE operations in REST APIs.
+- Often paired with @RequestBody, @PathVariable, @RequestParam.
+
+**Attributes**:
+- `value` / `path` → Endpoint URL
+- `consumes` → Accepted content type
+- `produces` → Response content type
+- `headers` / `params` → Request filtering
+
+**Example**:
+```java
+@PostMapping("/students")
+public Student create(@RequestBody Student student) { ... }
+```
+
+# @GetMapping (Spring MVC)
+
+**Purpose**: Maps HTTP GET requests to specific handler methods.
+
+**Package**: `org.springframework.web.bind.annotation.GetMapping`
+
+**Usage**:
+- Shortcut for @RequestMapping(method = RequestMethod.GET)
+- Commonly used for READ operations in REST APIs.
+- Often paired with @PathVariable and @RequestParam.
+
+**Attributes**:
+- `value` / `path` → Endpoint URL
+- `produces` → Response content type
+- `params` / `headers` → Request filtering
+
+**Example**:
+```java
+@GetMapping("/students/{id}")
+public Student getStudent(@PathVariable Long id) { ... }
+```
