@@ -2,7 +2,10 @@ package com.krishnaallu009.springBoot.controller;
 
 import com.krishnaallu009.springBoot.entity.Student;
 import com.krishnaallu009.springBoot.repository.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class StudentController {
@@ -19,12 +22,17 @@ public class StudentController {
     }
 
     @GetMapping("/students")
-    public java.util.List<Student> getAllStudents() {
+    public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
 
-    @GetMapping("/students/{id}")
-    public Student getStudentById(@PathVariable Integer id) {
+    @GetMapping("/students/{student-id}")
+    public Student getStudentById(@PathVariable("student-id") Integer id) {
         return studentRepository.findById(id).orElse(new Student());
+    }
+
+    @GetMapping("/students/search/{student-name}")
+    public List<Student> getStudentByName(@PathVariable("student-name") String name) {
+        return studentRepository.findAllByFirstNameContaining(name);
     }
 }
