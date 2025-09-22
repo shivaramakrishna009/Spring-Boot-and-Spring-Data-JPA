@@ -71,3 +71,13 @@ public class Student {
         this.age = age;
     }
 }
+
+/* Student json
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "john@gmail.com",
+    "age": 22
+}
+ */
+

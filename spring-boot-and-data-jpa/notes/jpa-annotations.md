@@ -114,3 +114,27 @@ public class Student { ... }
 @Column(name = "student_name", nullable = false, length = 50)
 private String name;
 ```
+
+# JPA Repository
+
+**Definition**: Spring Data JPA interface for CRUD, pagination, sorting, and query execution on JPA entities.
+
+**Extends**:
+- PagingAndSortingRepository
+- QueryByExampleExecutor
+
+**Features**:
+- CRUD methods (`save`, `findById`, `findAll`, `delete`)
+- Pagination & sorting
+- Derived query methods
+- Custom JPQL/native queries via @Query
+- Batch operations
+- Flush control
+- Query by Example (QBE)
+
+**Example**:
+```java
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+List<Employee> findByName(String name);
+}
+```
