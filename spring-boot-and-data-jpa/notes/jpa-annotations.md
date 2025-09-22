@@ -183,3 +183,52 @@ public Student create(@RequestBody Student student) { ... }
 @GetMapping("/students/{id}")
 public Student getStudent(@PathVariable Long id) { ... }
 ```
+
+# @DeleteMapping (Spring MVC)
+
+**Purpose**: Maps HTTP DELETE requests to specific handler methods.
+
+**Package**: `org.springframework.web.bind.annotation.DeleteMapping`
+
+**Usage**:
+- Shortcut for @RequestMapping(method = RequestMethod.DELETE)
+- Commonly used for DELETE operations in REST APIs.
+- Often paired with @PathVariable or @RequestParam.
+
+**Attributes**:
+- `value` / `path` → Endpoint URL
+- `produces` → Response content type
+- `consumes` → Request content type (rare)
+- `params` / `headers` → Request filtering
+
+**Example**:
+```java
+@DeleteMapping("/{id}")
+public ResponseEntity<Void> delete(@PathVariable Long id) {
+service.deleteById(id);
+return ResponseEntity.noContent().build();
+}
+```
+
+# @ResponseStatus (Spring MVC)
+
+**Purpose**: Sets a custom HTTP status code for controller methods or exceptions.
+
+**Package**: `org.springframework.web.bind.annotation.ResponseStatus`
+
+**Usage**:
+- On methods → For successful responses.
+- On exception classes → For error responses.
+
+**Attributes**:
+- `value` / `code` → HTTP status (e.g., HttpStatus.NOT_FOUND)
+- `reason` → Optional error message (HTML by default)
+
+**Examples**:
+```java
+@ResponseStatus(HttpStatus.CREATED)
+public void createUser(...) { ... }
+
+@ResponseStatus(HttpStatus.NOT_FOUND)
+public class ResourceNotFoundException extends RuntimeException { ... }
+```

@@ -3,6 +3,7 @@ package com.krishnaallu009.springBoot.controller;
 import com.krishnaallu009.springBoot.entity.Student;
 import com.krishnaallu009.springBoot.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,5 +35,11 @@ public class StudentController {
     @GetMapping("/students/search/{student-name}")
     public List<Student> getStudentByName(@PathVariable("student-name") String name) {
         return studentRepository.findAllByFirstNameContaining(name);
+    }
+
+    @DeleteMapping("/students/{student-id}")
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteStudentById(@PathVariable("student-id") Integer id) {
+        studentRepository.deleteById(id);
     }
 }
