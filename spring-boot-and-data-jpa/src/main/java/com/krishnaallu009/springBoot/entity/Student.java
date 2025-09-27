@@ -1,5 +1,6 @@
 package com.krishnaallu009.springBoot.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -27,19 +28,12 @@ public class Student {
     )
     private StudentProfile studentProfile;
 
-    public School getSchool() {
-        return school;
-    }
-
-    public void setSchool(School school) {
-        this.school = school;
-    }
-
     @ManyToOne
     @JoinColumn(
             name = "school_id",
             referencedColumnName = "id"
     )
+    @JsonBackReference
     private School school;
 
     public Student() {
@@ -99,6 +93,14 @@ public class Student {
     public void setStudentProfile(StudentProfile studentProfile) {
         this.studentProfile = studentProfile;
     }
+
+    public School getSchool() {
+        return school;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
+    }
 }
 
 /* Student json
@@ -111,6 +113,17 @@ public class Student {
         "hobby": "Reading",
         "address": "123 Main St, City, Country",
         "phoneNumber": "123-456-7890"
+    }
+}
+
+# Student with School JSON
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "j@hmail",
+    "age": 22,
+    "school": {
+        "id": 1
     }
 }
  */

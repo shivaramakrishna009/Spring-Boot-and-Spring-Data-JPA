@@ -343,3 +343,52 @@ private Department department;
 | @OneToMany    | One ↔ Many                     | FK in child table        | Department ↔ Employees   | Child owns FK | Parent with multiple children |
 | @ManyToOne    | Many ↔ One                     | FK in child table        | Employees ↔ Department   | Child entity | Many children reference one parent |
 | @ManyToMany   | Many ↔ Many                    | Join table with 2 FKs    | Students ↔ Courses       | Either side  | Complex many-to-many associations |
+
+
+# @JsonBackReference (Jackson)
+
+**Purpose**: Prevents infinite recursion in bidirectional relationships during JSON serialization.
+
+**Package**: `com.fasterxml.jackson.annotation.JsonBackReference`
+
+**Usage**:
+- Use with `@JsonManagedReference`.
+- `@JsonManagedReference` → forward side (serialized).
+- `@JsonBackReference` → back side (ignored in JSON).
+
+**Example**:
+```java
+public class User {
+@JsonManagedReference
+private List<Item> items;
+}
+
+public class Item {
+@JsonBackReference
+private User owner;
+}
+```
+
+# @JsonManagedReference (Jackson)
+
+**Purpose**: Marks the forward side of a bidirectional relationship for JSON serialization.
+
+**Package**: `com.fasterxml.jackson.annotation.JsonManagedReference`
+
+**Usage**:
+- Use with `@JsonBackReference`.
+- `@JsonManagedReference` → forward side (serialized).
+- `@JsonBackReference` → back side (ignored).
+
+**Example**:
+```java
+public class User {
+@JsonManagedReference
+private List<Item> items;
+}
+
+public class Item {
+@JsonBackReference
+private User owner;
+}
+```
