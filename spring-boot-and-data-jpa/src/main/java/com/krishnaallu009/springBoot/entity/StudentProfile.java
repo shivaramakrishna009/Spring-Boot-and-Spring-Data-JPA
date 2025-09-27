@@ -1,8 +1,6 @@
 package com.krishnaallu009.springBoot.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class StudentProfile {
@@ -11,6 +9,13 @@ public class StudentProfile {
     @GeneratedValue
     private Integer id;
     private String bio;
+
+    @OneToOne
+    @JoinColumn(
+            name = "student_id",
+            referencedColumnName = "id"
+    )
+    private Student student;
 
     public StudentProfile() {
     }

@@ -232,3 +232,59 @@ public void createUser(...) { ... }
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends RuntimeException { ... }
 ```
+
+# @OneToOne (JPA)
+
+**Purpose**: Defines a one-to-one relationship between two entities.
+
+**Key Points**:
+- One entity instance ↔ one other entity instance.
+- Owning side holds the foreign key (`@JoinColumn`).
+- Inverse side uses `mappedBy`.
+- Default fetch = EAGER.
+- Often combined with `cascade` for persistence.
+
+**Examples**:
+1. Unidirectional:
+```java
+   @OneToOne
+   @JoinColumn(name = "profile_id")
+   private Profile profile;
+```
+
+2. Bidirectional:
+```java
+   @OneToOne(mappedBy = "profile")
+   private User user;
+```
+
+3. Shared Primary Key:
+```java
+   @OneToOne
+   @MapsId
+   @JoinColumn(name = "id")
+   private Person person;
+```
+
+# Shared Primary Key @OneToOne Mapping
+
+**Definition**: A one-to-one relationship where the child entity’s primary key is also a foreign key referencing the parent’s primary key.
+
+**Annotations**:
+- `@OneToOne` → Defines the relationship.
+- `@MapsId` → In child entity, reuses parent’s ID as its own.
+- `@JoinColumn` → Specifies the foreign key column.
+
+**Example**:
+```java
+@Entity
+public class Passport {
+@Id
+private Long id;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id")
+    private Person person;
+}
+```
