@@ -11,9 +11,9 @@ public class Student {
     private Integer id;
 
     @Column(
-        name = "f_name",
-        nullable = false,
-        length = 50
+            name = "f_name",
+            nullable = false,
+            length = 50
     )
     private String firstName;
     private String lastName;
@@ -76,6 +76,14 @@ public class Student {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public StudentProfile getStudentProfile() {
+        return studentProfile;
+    }
+
+    public void setStudentProfile(StudentProfile studentProfile) {
+        this.studentProfile = studentProfile;
+    }
 }
 
 /* Student json
@@ -83,7 +91,12 @@ public class Student {
     "firstName": "John",
     "lastName": "Doe",
     "email": "john@gmail.com",
-    "age": 22
+    "age": 22,
+    "studentProfile": {
+        "hobby": "Reading",
+        "address": "123 Main St, City, Country",
+        "phoneNumber": "123-456-7890"
+    }
 }
  */
 
