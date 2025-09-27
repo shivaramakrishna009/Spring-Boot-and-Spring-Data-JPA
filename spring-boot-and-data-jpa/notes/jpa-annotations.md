@@ -288,3 +288,58 @@ private Long id;
     private Person person;
 }
 ```
+
+# @OneToMany (JPA)
+
+**Purpose**: Defines a one-to-many relationship between two entities.
+
+**Key Points**:
+- Parent ↔ multiple children.
+- Child table holds the foreign key.
+- Use `mappedBy` in parent to indicate child’s owning field.
+- Default fetch = LAZY.
+- Often combined with `cascade` and `orphanRemoval`.
+
+**Examples**:
+1. Bidirectional:
+```java
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Employee> employees;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department department;
+```
+2. Unidirectional (Join Table):
+```java
+   @OneToMany
+   @JoinTable(name = "post_comments",
+   joinColumns = @JoinColumn(name = "post_id"),
+   inverseJoinColumns = @JoinColumn(name = "comment_id"))
+   private List<Comment> comments;
+```
+
+# @ManyToOne (JPA)
+
+**Purpose**: Defines a many-to-one relationship (many children → one parent).
+
+**Key Points**:
+- Child entity owns the relationship.
+- Foreign key is in the child table.
+- Default fetch = EAGER (best practice: use LAZY).
+- Use @JoinColumn to define FK column.
+
+**Example**:
+@ManyToOne(fetch = FetchType.LAZY)
+@JoinColumn(name = "department_id")
+private Department department;
+
+
+# JPA Relationship Mapping Cheat Sheet
+
+| Mapping       | Definition                     | DB Structure             | Example                  | Owning Side | Best Use Case |
+|---------------|--------------------------------|--------------------------|--------------------------|-------------|---------------|
+| @OneToOne     | One ↔ One                      | Foreign key or shared PK | Person ↔ Passport        | Entity with @JoinColumn | Strict 1:1 relationships |
+| @OneToMany    | One ↔ Many                     | FK in child table        | Department ↔ Employees   | Child owns FK | Parent with multiple children |
+| @ManyToOne    | Many ↔ One                     | FK in child table        | Employees ↔ Department   | Child entity | Many children reference one parent |
+| @ManyToMany   | Many ↔ Many                    | Join table with 2 FKs    | Students ↔ Courses       | Either side  | Complex many-to-many associations |
