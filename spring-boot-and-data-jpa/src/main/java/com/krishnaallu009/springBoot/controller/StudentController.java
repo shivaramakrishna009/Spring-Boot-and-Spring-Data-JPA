@@ -1,6 +1,7 @@
 package com.krishnaallu009.springBoot.controller;
 
 import com.krishnaallu009.springBoot.dto.StudentDto;
+import com.krishnaallu009.springBoot.dto.StudentResponseDto;
 import com.krishnaallu009.springBoot.entity.School;
 import com.krishnaallu009.springBoot.entity.Student;
 import com.krishnaallu009.springBoot.repository.StudentRepository;
@@ -13,6 +14,10 @@ import java.util.List;
 public class StudentController {
 
     private final StudentRepository studentRepository;
+
+    public StudentController(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 
     private Student toStudent(StudentDto studentDto){
         Student student = new Student();
@@ -28,14 +33,20 @@ public class StudentController {
         return student;
     }
 
-    public StudentController(StudentRepository studentRepository) {
-        this.studentRepository = studentRepository;
+    private StudentResponseDto toStudentResponseDto(Student student){
+        return new StudentResponseDto(
+                student.getFirstName(),
+                student.getLastName(),
+                student.getEmail()
+        );
     }
 
     @PostMapping("/students")
-    public Student createStudent(@RequestBody StudentDto studentDto) {
+    public StudentResponseDto createStudent(@RequestBody StudentDto studentDto) {
         var student = toStudent(studentDto);
-        return studentRepository.save(student);
+        var savedStudent = studentRepository.save(student);
+
+        return toStudentResponseDto(savedStudent);
     }
 
     @GetMapping("/students")
