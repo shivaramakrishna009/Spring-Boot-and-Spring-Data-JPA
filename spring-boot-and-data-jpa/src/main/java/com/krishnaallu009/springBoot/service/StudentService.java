@@ -2,7 +2,6 @@ package com.krishnaallu009.springBoot.service;
 
 import com.krishnaallu009.springBoot.dto.StudentDto;
 import com.krishnaallu009.springBoot.dto.StudentResponseDto;
-import com.krishnaallu009.springBoot.entity.Student;
 import com.krishnaallu009.springBoot.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
