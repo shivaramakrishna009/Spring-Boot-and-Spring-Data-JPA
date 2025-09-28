@@ -229,4 +229,18 @@ class StudentServiceTest {
         Mockito.verify(studentMapperService, Mockito.times(1))
                 .toStudentResponseDto(student3);
     }
+
+    @Test
+    public void shouldDeleteStudentById(){
+        // Given
+        Integer studentId = 1;
+
+        // When
+        studentService.delete(studentId);
+
+        // Then
+        // Verify that the mocked method was called
+        Mockito.verify(studentRepository, Mockito.times(1))
+                .deleteById(studentId);
+    }
 }
