@@ -12,8 +12,9 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StudentServiceTest {
 
@@ -130,5 +131,102 @@ class StudentServiceTest {
                 .toStudentResponseDto(student1);
         Mockito.verify(studentMapperService, Mockito.times(1))
                 .toStudentResponseDto(student2);
+    }
+
+    @Test
+    public void shouldFindStudentById(){
+        // Given
+        Integer studentId = 1;
+        Student student = new Student(
+                "Bhargavi",
+                "J",
+                "rambha@gmail.com",
+                22
+        );
+        student.setId(studentId);
+
+        // Mock the behavior of studentRepository
+        Mockito.when(studentRepository.findById(studentId)).thenReturn(Optional.of(student));
+        Mockito.when(studentMapperService.toStudentResponseDto(student))
+                .thenReturn(new StudentResponseDto(
+                        student.getFirstName(),
+                        student.getLastName(),
+                        student.getEmail()
+                ));
+
+        // When
+        var studentResponseDto = studentService.findStudentById(studentId);
+
+        // Then
+        assertEquals("Bhargavi", studentResponseDto.firstName());
+        assertEquals("J", studentResponseDto.lastName());
+        assertEquals("rambha@gmail.com", studentResponseDto.email());
+
+        // Verify that the mocked methods were called
+        Mockito.verify(studentRepository, Mockito.times(1))
+                .findById(studentId);
+        Mockito.verify(studentMapperService, Mockito.times(1))
+                .toStudentResponseDto(student);
+    }
+
+    @Test
+    public void shouldReturnStudentsByName() {
+        // Given
+        String name = "Krishna";
+        Student student1 = new Student(
+                "Krishna",
+                "Allu",
+                "krishna@gmail.com",
+                24
+        );
+        student1.setId(1);
+        Student student2 = new Student(
+                "Bhargavi",
+                "J",
+                "bhanu@gmail.com",
+                20
+        );
+        student2.setId(2);
+        Student student3 = new Student(
+                "Krishna",
+                "Kumar",
+                "kumar@gmail.com",
+                22
+        );
+        student3.setId(3);
+
+        // Mock the behavior of studentRepository
+        Mockito.when(studentRepository.findAllByFirstNameContaining(name))
+                .thenReturn(List.of(student1, student3));
+        Mockito.when(studentMapperService.toStudentResponseDto(student1))
+                .thenReturn(new StudentResponseDto(
+                        student1.getFirstName(),
+                        student1.getLastName(),
+                        student1.getEmail()
+                ));
+        Mockito.when(studentMapperService.toStudentResponseDto(student3))
+                .thenReturn(new StudentResponseDto(
+                        student3.getFirstName(),
+                        student3.getLastName(),
+                        student3.getEmail()
+                ));
+
+        // When
+        var students = studentService.getStudentsByName(name);
+
+        // Then
+        assertEquals(2, students.size());
+        assertEquals("Krishna", students.get(0).firstName());
+        assertEquals("Krishna", students.get(1).firstName());
+        assertEquals("Allu", students.get(0).lastName());
+        assertEquals("Kumar", students.get(1).lastName());
+
+        // Verify that the mocked methods were called
+        Mockito.verify(studentRepository, Mockito.times(1))
+                .findAllByFirstNameContaining(name);
+        Mockito.verify(studentMapperService, Mockito.times(1))
+                .toStudentResponseDto(student1);
+        Mockito.verify(studentMapperService, Mockito.times(1))
+                .toStudentResponseDto(student3);
     }
 }
