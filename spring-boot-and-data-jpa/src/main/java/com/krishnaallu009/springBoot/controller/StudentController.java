@@ -5,6 +5,7 @@ import com.krishnaallu009.springBoot.dto.StudentResponseDto;
 import com.krishnaallu009.springBoot.entity.School;
 import com.krishnaallu009.springBoot.entity.Student;
 import com.krishnaallu009.springBoot.repository.StudentRepository;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +43,7 @@ public class StudentController {
     }
 
     @PostMapping("/students")
-    public StudentResponseDto createStudent(@RequestBody StudentDto studentDto) {
+    public StudentResponseDto saveStudent(@Valid @RequestBody StudentDto studentDto) {
         var student = toStudent(studentDto);
         var savedStudent = studentRepository.save(student);
 
