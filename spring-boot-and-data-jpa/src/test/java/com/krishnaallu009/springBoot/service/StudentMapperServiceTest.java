@@ -7,8 +7,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class StudentMapperServiceTest {
 
@@ -34,6 +33,14 @@ class StudentMapperServiceTest {
         assertEquals(studentDto.email(), student.getEmail());
         assertNotNull(student.getSchool());
         assertEquals(studentDto.schoolId(), student.getSchool().getId());
+    }
+
+    @Test
+    public void shouldThrowNullPointerExceptionWhenStudentDtoIsNull(){
+        var msg = assertThrows(NullPointerException.class, () ->
+                studentMapperService.toStudent(null)
+        );
+        assertEquals("StudentDto should not be null", msg.getMessage());
     }
 
     @Test
