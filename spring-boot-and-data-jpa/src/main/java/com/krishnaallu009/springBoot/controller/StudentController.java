@@ -7,8 +7,12 @@ import com.krishnaallu009.springBoot.entity.Student;
 import com.krishnaallu009.springBoot.repository.StudentRepository;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -69,5 +73,19 @@ public class StudentController {
     @ResponseStatus(HttpStatus.OK)
     public void deleteStudentById(@PathVariable("student-id") Integer id) {
         studentRepository.deleteById(id);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<?> handleMethodArgumentNotValidException(
+            MethodArgumentNotValidException exception
+    ){
+        var errors = new HashMap<String, String>();
+        exception.getBindingResult().getAllErrors()
+                .forEach(error -> {
+                    var fieldName = ((FieldError)error).getField();
+                    var errorMessage = error.getDefaultMessage();
+                    errors.put(fieldName, errorMessage);
+                });
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 }
