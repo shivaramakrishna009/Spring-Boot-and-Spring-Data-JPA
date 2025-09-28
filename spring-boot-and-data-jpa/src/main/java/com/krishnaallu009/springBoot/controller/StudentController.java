@@ -2,9 +2,9 @@ package com.krishnaallu009.springBoot.controller;
 
 import com.krishnaallu009.springBoot.dto.StudentDto;
 import com.krishnaallu009.springBoot.dto.StudentResponseDto;
-import com.krishnaallu009.springBoot.entity.School;
 import com.krishnaallu009.springBoot.entity.Student;
 import com.krishnaallu009.springBoot.repository.StudentRepository;
+import com.krishnaallu009.springBoot.service.StudentMapperService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,39 +14,19 @@ import java.util.List;
 public class StudentController {
 
     private final StudentRepository studentRepository;
+    private final StudentMapperService studentMapperService;
 
-    public StudentController(StudentRepository studentRepository) {
+    public StudentController(StudentRepository studentRepository, StudentMapperService studentMapperService) {
         this.studentRepository = studentRepository;
-    }
-
-    private Student toStudent(StudentDto studentDto){
-        Student student = new Student();
-        student.setFirstName(studentDto.firstName());
-        student.setLastName(studentDto.lastName());
-        student.setEmail(studentDto.email());
-
-        var school = new School();
-        school.setId(studentDto.schoolId());
-
-        student.setSchool(school);
-
-        return student;
-    }
-
-    private StudentResponseDto toStudentResponseDto(Student student){
-        return new StudentResponseDto(
-                student.getFirstName(),
-                student.getLastName(),
-                student.getEmail()
-        );
+        this.studentMapperService = studentMapperService;
     }
 
     @PostMapping("/students")
     public StudentResponseDto createStudent(@RequestBody StudentDto studentDto) {
-        var student = toStudent(studentDto);
+        var student = studentMapperService.toStudent(studentDto);
         var savedStudent = studentRepository.save(student);
 
-        return toStudentResponseDto(savedStudent);
+        return studentMapperService.toStudentResponseDto(savedStudent);
     }
 
     @GetMapping("/students")
