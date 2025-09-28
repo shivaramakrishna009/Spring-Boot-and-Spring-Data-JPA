@@ -26,16 +26,22 @@ public class StudentService {
         return studentMapperService.toStudentResponseDto(savedStudent);
     }
 
-    public List<Student> getAllStudents() {
-        return studentRepository.findAll();
+    public List<StudentResponseDto> getAllStudents() {
+        return studentRepository.findAll()
+                .stream().map(studentMapperService::toStudentResponseDto)
+                .toList();
     }
 
-    public Student findStudentById(Integer id) {
-        return studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
+    public StudentResponseDto findStudentById(Integer id) {
+        return studentRepository.findById(id)
+                .map(studentMapperService::toStudentResponseDto)
+                .orElseThrow(() -> new RuntimeException("Student not found with id: " + id));
     }
 
-    public List<Student> getStudentsByName(String name) {
-        return studentRepository.findAllByFirstNameContaining(name);
+    public List<StudentResponseDto> getStudentsByName(String name) {
+        return studentRepository.findAllByFirstNameContaining(name).stream()
+                .map(studentMapperService::toStudentResponseDto)
+                .toList();
     }
 
     public void delete(Integer id) {

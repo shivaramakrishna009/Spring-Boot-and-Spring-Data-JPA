@@ -4,7 +4,9 @@ import com.krishnaallu009.springBoot.dto.StudentDto;
 import com.krishnaallu009.springBoot.dto.StudentResponseDto;
 import com.krishnaallu009.springBoot.entity.School;
 import com.krishnaallu009.springBoot.entity.Student;
+import org.springframework.stereotype.Service;
 
+@Service
 public class StudentMapperService {
 
     public Student toStudent(StudentDto studentDto){

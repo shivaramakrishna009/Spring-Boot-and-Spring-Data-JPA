@@ -3,8 +3,6 @@ package com.krishnaallu009.springBoot.controller;
 import com.krishnaallu009.springBoot.dto.StudentDto;
 import com.krishnaallu009.springBoot.dto.StudentResponseDto;
 import com.krishnaallu009.springBoot.entity.Student;
-import com.krishnaallu009.springBoot.repository.StudentRepository;
-import com.krishnaallu009.springBoot.service.StudentMapperService;
 import com.krishnaallu009.springBoot.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -26,17 +24,17 @@ public class StudentController {
     }
 
     @GetMapping("/students")
-    public List<Student> getAllStudents() {
+    public List<StudentResponseDto> getAllStudents() {
         return studentService.getAllStudents();
     }
 
     @GetMapping("/students/{student-id}")
-    public Student getStudentById(@PathVariable("student-id") Integer id) {
+    public StudentResponseDto getStudentById(@PathVariable("student-id") Integer id) {
         return studentService.findStudentById(id);
     }
 
     @GetMapping("/students/search/{student-name}")
-    public List<Student> getStudentsByName(@PathVariable("student-name") String name) {
+    public List<StudentResponseDto> getStudentsByName(@PathVariable("student-name") String name) {
         return studentService.getStudentsByName(name);
     }
 
