@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: spring-boot-and-data-jpa
+
+  datasource:
+      url: jdbc:mysql://localhost:3306/spring_boot_and_data_jpa?useSSL=false&serverTimezone=UTC
+      username: root
+      password: 18ak1a05c2
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
