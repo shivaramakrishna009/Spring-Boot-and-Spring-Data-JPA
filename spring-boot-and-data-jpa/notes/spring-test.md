@@ -125,3 +125,45 @@ connection.close();
 }
 ```
 
+# @InjectMocks (Mockito)
+
+**Package**: `org.mockito.InjectMocks`
+
+**Purpose**: Creates an instance of the class under test and injects mocks into it.
+
+**Injection Order**:
+1. Constructor injection
+2. Setter injection
+3. Field injection
+
+**Usage**:
+- Annotate the class under test with @InjectMocks
+- Annotate dependencies with @Mock
+- Initialize with MockitoAnnotations.openMocks(this) or @ExtendWith(MockitoExtension.class)
+
+**Example**:
+```java
+@Mock private UserRepository userRepository;
+@Mock private EmailService emailService;
+@InjectMocks private UserService userService;
+```
+
+# @Mock (Mockito)
+
+**Package**: `org.mockito.Mock`
+
+**Purpose**: Creates a mock object of a class or interface.
+
+**Usage**:
+- Annotate dependencies with @Mock
+- Stub behavior with `when(...).thenReturn(...)`
+- Verify interactions with `verify(...)`
+
+**Example**:
+```java
+@Mock private UserRepository userRepository;
+@InjectMocks private UserService userService;
+
+when(userRepository.findById(1L)).thenReturn(Optional.of(new User(1L, "Siva")));
+verify(userRepository).findById(1L);
+```
