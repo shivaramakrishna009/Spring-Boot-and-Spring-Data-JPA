@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 
 public class Author {
     @Id
@@ -53,15 +55,5 @@ public class Author {
 
     private int age;
 
-    @Column(
-            nullable = false,
-            updatable = false
-    )
-    private LocalDateTime createdAt;
-
-    @Column(
-            insertable = false
-    )
-    private LocalDateTime updatedAt;
 
 }
