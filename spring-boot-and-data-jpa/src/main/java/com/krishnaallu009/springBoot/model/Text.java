@@ -2,6 +2,7 @@ package com.krishnaallu009.springBoot.model;
 
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,7 +15,8 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @SuperBuilder
 @Entity
-@DiscriminatorValue("T")
+@PrimaryKeyJoinColumn(name = "text_id")
+//@DiscriminatorValue("T")
 public class Text extends Resource {
     private String content;
 }

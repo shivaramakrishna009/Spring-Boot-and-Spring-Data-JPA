@@ -11,8 +11,8 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @Entity
 @SuperBuilder
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "resource_type", discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.JOINED)
+//@DiscriminatorColumn(name = "resource_type", discriminatorType = DiscriminatorType.STRING)
 public class Resource {
 
     @Id
