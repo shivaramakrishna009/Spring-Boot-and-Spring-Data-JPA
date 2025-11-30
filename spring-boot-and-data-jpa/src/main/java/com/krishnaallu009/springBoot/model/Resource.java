@@ -2,7 +2,6 @@ package com.krishnaallu009.springBoot.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -13,6 +12,7 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @SuperBuilder
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "resource_type", discriminatorType = DiscriminatorType.STRING)
 public class Resource {
 
     @Id
