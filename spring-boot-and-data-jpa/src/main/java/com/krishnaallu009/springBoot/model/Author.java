@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -55,5 +56,6 @@ public class Author {
 
     private int age;
 
-
+    @ManyToMany(mappedBy = "authors")
+    private List<Course> courses;
 }

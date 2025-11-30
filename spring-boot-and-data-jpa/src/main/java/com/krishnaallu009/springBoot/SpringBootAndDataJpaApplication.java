@@ -19,7 +19,7 @@ public class SpringBootAndDataJpaApplication {
      * @param authorRepository
      * @return
      */
-    @Bean
+//    @Bean
     public CommandLineRunner commandLineRunner(
             AuthorRepository authorRepository
     ) {
