@@ -1,21 +1,17 @@
 package com.krishnaallu009.springBoot.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Builder
-public class Resource {
+@SuperBuilder
+public class Resource extends BaseEntity{
 
-    @Id
-    @GeneratedValue
-    private Integer id;
     private String name;
     private int size;
     private String url;
