@@ -1,5 +1,6 @@
 package com.krishnaallu009.springBoot.model;
 
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,6 +12,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-public class Video extends BaseEntity{
+@Entity
+public class Video extends Resource{
     private int length;
 }
